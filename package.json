@@ -1,0 +1,29 @@
+{
+  "name": "hexo-filter-post-identifier",
+  "version": "0.0.1",
+  "description": "Hexo plugin for adding a permanent link identifier.",
+  "files": [ "index.js", "lib" ],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rm -rf dist/*",
+    "prepublish": "npm run clean; lsc -co lib src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Talljoe/hexo-filter-post-identifier.git"
+  },
+  "keywords": [
+    "hexo",
+    "filter"
+  ],
+  "author": "Joe Wasson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Talljoe/hexo-filter-post-identifier/issues"
+  },
+  "homepage": "https://github.com/Talljoe/hexo-filter-post-identifier#readme",
+  "devDependencies": {
+    "livescript": "^1.5.0"
+  }
+}
