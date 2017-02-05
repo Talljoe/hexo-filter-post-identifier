@@ -2,12 +2,16 @@
   "name": "hexo-filter-post-identifier",
   "version": "0.0.1",
   "description": "Hexo plugin for adding a permanent link identifier.",
-  "files": [ "index.js", "lib" ],
+  "files": [
+    "index.js",
+    "lib"
+  ],
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run build && mocha --compilers ls:livescript",
     "clean": "rm -rf dist/*",
-    "prepublish": "npm run clean; lsc -co lib src"
+    "build": "lsc -co lib src",
+    "prepublish": "npm run clean && npm run test"
   },
   "repository": {
     "type": "git",
@@ -24,6 +28,16 @@
   },
   "homepage": "https://github.com/Talljoe/hexo-filter-post-identifier#readme",
   "devDependencies": {
-    "livescript": "^1.5.0"
+    "bluebird": "^3.4.7",
+    "chai": "^3.5.0",
+    "chai-sinon": "^2.8.1",
+    "hexo": "^3.2.2",
+    "livescript": "^1.5.0",
+    "mocha": "^3.2.0",
+    "moment": "^2.17.1",
+    "sinon": "^1.17.7"
+  },
+  "dependencies": {
+    "prelude-ls": "^1.1.2"
   }
 }

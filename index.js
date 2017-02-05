@@ -1,1 +1,1 @@
-module.exports = require('./lib/post-identifier');
+module.exports = require('./lib/post-identifier')(hexo);
