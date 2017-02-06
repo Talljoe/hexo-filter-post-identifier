@@ -4,12 +4,10 @@ node_js:
   - "6"
   - "7"
 
-install: npm install --ignore-scripts
-
 script:
-  - npm run build
+  - npm run compile
   - npm run tap
 
 after_script:
   - npm install coveralls
-  - npm run cover:report -s | `npm bin`/coveralls.js
+  - npm run cover:report -s | `npm bin`/coveralls

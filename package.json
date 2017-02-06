@@ -9,16 +9,16 @@
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf dist/*",
-    "build": "lsc -co lib src",
+    "compile": "lsc -co lib src",
     "test": "nyc mocha",
     "tap": "nyc --reporter=lcov mocha -R tap",
     "cover:report": "nyc report --reporter=text-lcov",
     "watch": "mocha --watch -R min",
     "preversion": "npm test",
-    "prepublish": "npm run prepublish:clean -s && npm run prepublish:build -s && npm run prepublish:test -s",
-    "prepublish:clean": "chalk -t '{red ..} {cyan.bold Cleaning}'  && npm run clean -s",
-    "prepublish:build": "chalk -t '{red ..} {cyan.bold Building}'  && npm run build -s",
-    "prepublish:test": "chalk -t '{red ..} {cyan.bold Testing}' && mocha -R progress"
+    "build": "npm run build:clean -s && npm run build:compile -s && npm run build:test -s",
+    "build:clean": "chalk -t '{red ..} {cyan.bold Cleaning}'  && npm run clean -s",
+    "build:compile": "chalk -t '{red ..} {cyan.bold Compiling}'  && npm run compile -s",
+    "build:test": "chalk -t '{red ..} {cyan.bold Testing}' && mocha -R progress"
   },
   "repository": {
     "type": "git",
