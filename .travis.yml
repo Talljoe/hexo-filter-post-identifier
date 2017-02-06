@@ -17,5 +17,4 @@ deploy:
   on:
     tags: true
     repo: Talljoe/hexo-filter-post-identifier
-    branch: master
     node: '7'
