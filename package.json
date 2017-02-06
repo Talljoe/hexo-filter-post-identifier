@@ -8,7 +8,7 @@
   ],
   "main": "index.js",
   "scripts": {
-    "clean": "rm -rf dist/*",
+    "clean": "rm -rf lib coverage *.tgz",
     "compile": "lsc -co lib src",
     "test": "nyc mocha",
     "tap": "nyc --reporter=lcov mocha -R tap",
@@ -16,6 +16,7 @@
     "watch": "mocha --watch -R min",
     "preversion": "npm test",
     "postversion": "git push --follow-tags",
+    "prepublish": "npm run clean -s && npm run compile -s",
     "build": "npm run build:clean -s && npm run build:compile -s && npm run build:test -s",
     "build:clean": "chalk -t '{red ..} {cyan.bold Cleaning}'  && npm run clean -s",
     "build:compile": "chalk -t '{red ..} {cyan.bold Compiling}'  && npm run compile -s",
