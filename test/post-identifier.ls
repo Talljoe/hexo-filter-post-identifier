@@ -33,15 +33,15 @@ describe "hexo-filter-post-identifier" ->
 
   context "should return consistent results" ->
     tests =
-      * data: post \Title, moment "2016-01-01"
-        expected: \m7e4V3jVR22VTErAAqWhzroE+CI=
-      * data: post "A longer title", moment "2016-09-30"
-        expected: \U0pWFb9GbYHgKgGvHY5Oz2CsIm8=
-      * data: post "Something else", moment "1974-05-12 09:30:00 Z"
+      * data: post \Title, moment '2000-01-01T00:00:00Z'
+        expected: \HitXAYElOEKuvPsnlidQO/c5K1s=
+      * data: post "A longer title", moment '2017-02-06T03:17:10Z'
+        expected: \oBVTvuxEYwhOZy614BIvIbTP45k=
+      * data: post "Something else", moment '1974-05-12T09:30:00Z'
         expected: \hvhtOkmOS/rA543jsqej1rjhlBk=
-      * data: post \Testing, moment "2017-01-01 00:00:00 Z"
+      * data: post \Testing, moment '2017-01-01T00:00:00Z'
         expected: \KoUckkId0yf24pdfduKkftJlTPo=
-      * data: post void, moment "2017-01-01 00:00:00 Z"
+      * data: post void, moment '2017-01-01T00:00:00Z'
         expected: \/bQGo79m3q0IOBMB25/pizvx640=
       * data: post "Another Void", void
         expected: \eqetU5Vb/IQRFWBQJkR3oj1bnAg=
