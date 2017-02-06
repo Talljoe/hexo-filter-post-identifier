@@ -41,9 +41,13 @@ describe "hexo-filter-post-identifier" ->
         expected: \hvhtOkmOS/rA543jsqej1rjhlBk=
       * data: post \Testing, moment "2017-01-01 00:00:00 Z"
         expected: \KoUckkId0yf24pdfduKkftJlTPo=
+      * data: post void, moment "2017-01-01 00:00:00 Z"
+        expected: \/bQGo79m3q0IOBMB25/pizvx640=
+      * data: post "Another Void", void
+        expected: \eqetU5Vb/IQRFWBQJkR3oj1bnAg=
 
     tests.forEach (testCase) ->
-      specify testCase.data.title, ->
+      specify testCase.data.title ? \Void, ->
         runSut testCase.data
         expect(testCase.data.identifier).to.equal testCase.expected
 
