@@ -15,6 +15,7 @@
     "cover:report": "nyc report --reporter=text-lcov",
     "watch": "mocha --watch -R min",
     "preversion": "npm test",
+    "postversion": "git push && git push --tags",
     "build": "npm run build:clean -s && npm run build:compile -s && npm run build:test -s",
     "build:clean": "chalk -t '{red ..} {cyan.bold Cleaning}'  && npm run clean -s",
     "build:compile": "chalk -t '{red ..} {cyan.bold Compiling}'  && npm run compile -s",

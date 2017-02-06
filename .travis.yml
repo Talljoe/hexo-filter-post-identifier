@@ -1,13 +1,21 @@
 language: node_js
 node_js:
-  - "4"
-  - "6"
-  - "7"
-
+- '4'
+- '6'
+- '7'
 script:
-  - npm run compile
-  - npm run tap
-
+- npm run compile
+- npm run tap
 after_script:
-  - npm install coveralls
-  - npm run cover:report -s | `npm bin`/coveralls
+- npm install coveralls
+- npm run cover:report -s | `npm bin`/coveralls
+deploy:
+  provider: npm
+  email: joe@npm.talljoe.com
+  api_key:
+    secure: eQuzsP06vSsIc7pZpaR6ZpHQFSjS5LP9VdDUZYv6MO9O1Rq4LIchAx1sYeAAbhSZH85+DEr/YdQ5EfU4VgZsD8bcQbdvAOkUWUwIMupWUoYwYDp5cdOF1FnyCvKfjiLTU6wat/ylGZBbANPPKXdHefT8HdS4jDkhs8OIMvnhIVnmLLZcOF0UN8ImETYjFyzP4ziqin191Ninqe2YPK55wdi2ZhWN+3Xjeohv5TfQNAra/L88oVtWW7QYUdoI7WPj8D3ziaQ2NNlVuGbRj5v6DrXQusZfOQVtXmRo3BLbSycMloVzbPT9AbkzEhvwyNxuXbcFAmJETzofeF2B1YyNQ6fYfFT0kDOTvbrydRsQn8TwRRaRtHgG+O4G0woJrBaO78/ewunzVhbDeyAqeGFQTdEytXWV9lpdXb5/50MiCHuGgVHlJcAWHaHYlTTQwowLOfcQ9vQpN7gNFTSCJA8sacyf+Kw0i1Eu3IXPYmOtbBpP8ckMBIvfFI0x2aTFkIrXt3Nkc6QeArjhqpFsaD8Hs7gK/9agCmaeUqYYcnscxYvG1hyHCF1oGEaBpZNQySIqIHJjlJ4tExBaicnccXA/toRRN6/jRvF1NVNIPcpwDO834kyQxYF231uTq5yntPioLLQdfIgldhJePAPFR+JV+64JZ8JbJTyow5kowx9vtLQ=
+  on:
+    tags: true
+    repo: Talljoe/hexo-filter-post-identifier
+    branch: master
+    node: '7'
