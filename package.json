@@ -1,6 +1,6 @@
 {
   "name": "hexo-filter-post-identifier",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Hexo plugin for adding a permanent link identifier.",
   "files": [
     "index.js",
@@ -10,10 +10,8 @@
   "scripts": {
     "clean": "rm -rf dist/*",
     "build": "lsc -co lib src",
-
     "test": "mocha --compilers ls:livescript",
     "watch": "mocha --watch -R min --compilers ls:livescript",
-
     "prepublish": "npm run prepublish:clean -s && npm run prepublish:build -s && npm run prepublish:test -s",
     "prepublish:clean": "chalk -t '{red ..} {cyan.bold Cleaning}'  && npm run clean -s",
     "prepublish:build": "chalk -t '{red ..} {cyan.bold Building}'  && npm run build -s",
