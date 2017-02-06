@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - "4"
+  - "6"
+  - "7"
+
+script:
+  - npm run build
+  - npm run tap
+
+after_script:
+  - npm install coveralls
+  - npm run cover:report -s | `npm bin`/coveralls.js

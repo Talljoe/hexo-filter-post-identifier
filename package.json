@@ -10,12 +10,15 @@
   "scripts": {
     "clean": "rm -rf dist/*",
     "build": "lsc -co lib src",
-    "test": "mocha --compilers ls:livescript",
-    "watch": "mocha --watch -R min --compilers ls:livescript",
+    "test": "nyc mocha",
+    "tap": "nyc --reporter=lcov mocha -R tap",
+    "cover:report": "nyc report --reporter=text-lcov",
+    "watch": "mocha --watch -R min",
+    "preversion": "npm test",
     "prepublish": "npm run prepublish:clean -s && npm run prepublish:build -s && npm run prepublish:test -s",
     "prepublish:clean": "chalk -t '{red ..} {cyan.bold Cleaning}'  && npm run clean -s",
     "prepublish:build": "chalk -t '{red ..} {cyan.bold Building}'  && npm run build -s",
-    "prepublish:test": "chalk -t '{red ..} {cyan.bold Testing}' && mocha -R progress --compilers ls:livescript"
+    "prepublish:test": "chalk -t '{red ..} {cyan.bold Testing}' && mocha -R progress"
   },
   "repository": {
     "type": "git",
@@ -40,6 +43,16 @@
     "livescript": "^1.5.0",
     "mocha": "^3.2.0",
     "moment": "^2.17.1",
+    "nyc": "^10.1.2",
     "sinon": "^1.17.7"
+  },
+  "nyc": {
+    "extension": [
+      ".ls"
+    ],
+    "reporter": [
+      "text-summary",
+      "lcov"
+    ]
   }
 }

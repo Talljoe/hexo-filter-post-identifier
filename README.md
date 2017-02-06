@@ -1,5 +1,8 @@
 # hexo-filter-post-identifier
 Hexo plugin for adding a permanent link identifier.
+[![Build Status](https://travis-ci.org/Talljoe/hexo-filter-post-identifier.svg?branch=master)](https://travis-ci.org/Talljoe/hexo-filter-post-identifier)
+[![Coverage Status](https://coveralls.io/repos/github/Talljoe/hexo-filter-post-identifier/badge.svg?branch=master)](https://coveralls.io/github/Talljoe/hexo-filter-post-identifier?branch=master)
+[![npm version](https://badge.fury.io/js/hexo-filter-post-identifier.svg)](https://badge.fury.io/js/hexo-filter-post-identifier)
 
 ## Method of Generation
 
