@@ -18,3 +18,4 @@ deploy:
     tags: true
     repo: Talljoe/hexo-filter-post-identifier
     node: '7'
+    condition: $TRAVIS_EVENT_TYPE != cron
