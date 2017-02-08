@@ -2,7 +2,7 @@ require! "crypto" : { createHash }
 
 getId = (post) ->
   hash = createHash \sha1
-  [post?title, post?date?.clone!.utc!format!]
+  [post.title, post.date?.clone!.utc!format!]
     .filter (?)
     .reduce (+), ''
     |> hash.update
