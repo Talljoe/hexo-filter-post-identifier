@@ -1,14 +1,15 @@
 require! "crypto" : { createHash }
 
-getId = (post) ->
-  hash = createHash \sha1
-  [post.title, post.date?.clone!.utc!format!]
-    .filter (?)
-    .reduce (+), ''
-    |> hash.update
+module.exports = class PostIdentifier
+  (@hexo) ~>
+    @hexo.extend.filter.register \before_post_render, (post) !~>
+      post.identifier ?= @_getId post
 
-  hash.digest \base64
+  _getId: (post) ->
+    hash = createHash \sha1
+    [post.title, post.date?.clone!.utc!format!]
+      .filter (?)
+      .reduce (+), ''
+      |> hash.update
 
-module.exports = (hexo) !->
-  hexo.extend.filter.register \before_post_render, (post) !->
-    post.identifier ?= getId post
+    hash.digest \base64

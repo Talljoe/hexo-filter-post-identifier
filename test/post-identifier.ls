@@ -18,6 +18,7 @@ post = (title, date, identifier = void) ->
 
 describe "hexo-filter-post-identifier" ->
   var hexo
+
   beforeEach ->
     hexo := getHexo!
     hexo.extend.filter.store = {}
@@ -46,10 +47,10 @@ describe "hexo-filter-post-identifier" ->
       * data: post "Another Void", void
         expected: \eqetU5Vb/IQRFWBQJkR3oj1bnAg=
 
-    tests.forEach (testCase) ->
-      specify testCase.data.title ? \Void, ->
-        runSut testCase.data
-        expect(testCase.data.identifier).to.equal testCase.expected
+    for let { data, expected } in tests
+      specify data.title ? \Void, ->
+        runSut data
+        expect data.identifier .to .equal expected
 
   specify "should set identifier if missing" ->
     const data = post \Title, moment!
