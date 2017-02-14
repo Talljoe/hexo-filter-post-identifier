@@ -11,11 +11,11 @@ module.exports = class PostIdentifier
     hash = createHash \sha1
     @fields
       .map -> post[it]
+      .filter (?)
       .map ->
         | it instanceof moment => it.clone!utc!format!
         | typeof it is \string => it
         | otherwise => JSON.stringify it
-      .filter (?)
       .reduce (+), ''
       |> hash.update
 
