@@ -23,32 +23,53 @@ describe "hexo-filter-post-identifier" ->
     hexo := getHexo!
     hexo.extend.filter.store = {}
     sinon.spy(hexo.extend.filter, \register)
-    sut(hexo)
 
   afterEach -> hexo.extend.filter.register.restore!
 
-  runSut = !-> hexo.extend.filter.execSync \before_post_render, it, { context: hexo }
+  withFields = !->
+    hexo.config.post_identifier_fields = it
+
+  runSut = !->
+    sut(hexo)
+    hexo.extend.filter.execSync \before_post_render, it, { context: hexo }
 
   specify "should register a function" ->
+    sut hexo
     expect(hexo.extend.filter.register).to.have.been.called
 
   context "should return consistent results" ->
     tests =
-      * data: post \Title, moment '2000-01-01T00:00:00Z'
+      * title: "for both title and date"
+        data: post \Title, moment '2000-01-01T00:00:00Z'
         expected: \HitXAYElOEKuvPsnlidQO/c5K1s=
-      * data: post "A longer title", moment '2017-02-06T03:17:10Z'
-        expected: \oBVTvuxEYwhOZy614BIvIbTP45k=
-      * data: post "Something else", moment '1974-05-12T09:30:00Z'
-        expected: \hvhtOkmOS/rA543jsqej1rjhlBk=
-      * data: post \Testing, moment '2017-01-01T00:00:00Z'
-        expected: \KoUckkId0yf24pdfduKkftJlTPo=
-      * data: post void, moment '2017-01-01T00:00:00Z'
+      * title: "for date and empty title"
+        data: post '', moment '2010-07-15T12:34:56Z'
+        expected: \Yn5Z0JYEDdzPDq9hVcCPjuIOF9Y=
+      * title: "for only date"
+        data: post void, moment '2017-01-01T00:00:00Z'
         expected: \/bQGo79m3q0IOBMB25/pizvx640=
-      * data: post "Another Void", void
+      * title: "for only title"
+        data: post "Another Void", void
         expected: \eqetU5Vb/IQRFWBQJkR3oj1bnAg=
+      * title: "for no matching fields"
+        data: { alt: "not this" }
+        expected: \2jmj7l5rSw0yVb/vlWAYkK/YBwk=
+      * title: "for alternate fields"
+        data: { foo: \Title, up: moment '2000-01-01T00:00:00Z' }
+        fields: <[ foo up ]>
+        expected: \HitXAYElOEKuvPsnlidQO/c5K1s=
+      * title: "for alternate date field"
+        data: { publishedDate: moment '2017-01-01T00:00:00Z' }
+        fields: <[ publishedDate ]>
+        expected: \/bQGo79m3q0IOBMB25/pizvx640=
+      * title: "for object property"
+        data: { extra: foo: \bar }
+        fields: <[ extra ]>
+        expected: \pedE0BZFQNM7HX6mFsKPL6l+dUo=
 
-    for let { data, expected } in tests
-      specify data.title ? \Void, ->
+    for let { title, data, expected, fields } in tests
+      specify title, ->
+        hexo.config.post_identifier_properties ?= fields
         runSut data
         expect data.identifier .to .equal expected
 
@@ -133,3 +154,14 @@ describe "hexo-filter-post-identifier" ->
       runSut post1
       runSut post2
       expect(post1.identifier).to.equal post2.identifier
+
+  context "different objects" ->
+    const fields = <[ custom ]>
+    const post1 = custom: key: \Value1
+    const post2 = custom: key: \Value2
+
+    specify "should produce different ids" ->
+      hexo.config.post_identifier_properties = fields
+      runSut post1
+      runSut post2
+      expect(post1.identifier).to.not.equal post2.identifier

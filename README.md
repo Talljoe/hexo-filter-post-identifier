@@ -9,8 +9,18 @@ Hexo plugin for adding a permanent link identifier.
 
 ## Installation
 
+Install the npm package in the root of your site.
+
 ```
 npm install --save hexo-filter-post-identifier
+```
+
+By default the filter builds the identifierr from title and date. You may optionally configure your site to use a different set of properties:
+
+```yaml
+post_identifier_properties:
+  - publishedDate
+  - slug
 ```
 
 ## Usage
@@ -64,6 +74,8 @@ Output:
 ## Method of Generation
 
 This plugin looks at the `title` and `date` properties--ignoring any that are null--and generates a SHA1 hash of those values then encodes the result as base64. This creates an id that lookes something like `29YRA5pQIXVoU5U8yz+oTxj+gmU=`, perfect for [Disqus](https://disqus.com/).
+
+You can override the default properties in your site config by setting the `post_identifier_properties`.  This is a list of strings representing the properties on a post to use. As expected, if any of these properties are missing on the post then they are ignored.
 
 ## Author
 
